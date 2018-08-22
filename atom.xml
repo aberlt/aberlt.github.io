@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>aberlt’s blog</title>
+  <subtitle>一名龟速摸索中的 iOS 菜鸟</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://blog.aberlt.com/"/>
+  <updated>2018-07-05T07:57:48.627Z</updated>
+  <id>https://blog.aberlt.com/</id>
+  
+  <author>
+    <name>aberlt</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Xcode 导出字体配色方案和代码块</title>
+    <link href="https://blog.aberlt.com/2018/07/05/Xcode-export-color-theme-and-code-snippet/"/>
+    <id>https://blog.aberlt.com/2018/07/05/Xcode-export-color-theme-and-code-snippet/</id>
+    <published>2018-07-05T06:55:31.000Z</published>
+    <updated>2018-07-05T07:57:48.627Z</updated>
+    
+    <content type="html"><![CDATA[<p>这两天 Xcode 出了点问题，需要卸载重装。于是搜了下怎么导出<strong>字体配色方案</strong>和<strong>代码块</strong>，这里做一下记录。</p>
+<a id="more"></a>
+<h2 id="字体配色方案"><a href="#字体配色方案" class="headerlink" title="字体配色方案"></a>字体配色方案</h2><p>当我们修改了 Xcode 的配色方案后，在以下 <code>~/Library/Developer/Xcode/UserData/FontAndColorThemes</code> 目录会有一个后缀名为 <code>xccolortheme</code> 的配置文件，将其拷贝到其它目录。重新安装 Xcode 之后再将该文件拷贝回  <code>FontAndColorThemes</code> 目录即可。</p>
+<blockquote>
+<p>如果没有修改配色方案的话需要手动创建 <code>FontAndColorThemes</code> 目录<br>当然，也可以直接拷贝此目录</p>
+</blockquote>
+<h2 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h2><p>代码块存储在 <code>~/Library/Developer/Xcode/UserData/CodeSnippets</code> 下，进入该目录可以看到每个代码块都被存储为一个文件，后缀名为 <code>codesnippet</code> 。</p>
+<p>与导出字体配色方案一样，同样将相应的文件或目录拷贝到其它目录，在 Xcode 重装之后再拷贝回去。</p>
+<blockquote>
+<p>需要注意的是，如果在将文件拷贝回去之前已经打开了 Xcode 的话，需要重新启动才可以看到相关配置</p>
+</blockquote>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://blog.csdn.net/zidonghua082/article/details/25375625">xcode自定义配色方案以及配色方案的移植</a></p>
+<p><a href="https://blog.csdn.net/jsd0915/article/details/54892360">xcode如何导出自定义的代码块</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这两天 Xcode 出了点问题，需要卸载重装。于是搜了下怎么导出&lt;strong&gt;字体配色方案&lt;/strong&gt;和&lt;strong&gt;代码块&lt;/strong&gt;，这里做一下记录。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="杂记" scheme="https://blog.aberlt.com/categories/%E6%9D%82%E8%AE%B0/"/>
+    
+    
+      <category term="Xcode" scheme="https://blog.aberlt.com/tags/Xcode/"/>
+    
+      <category term="字体" scheme="https://blog.aberlt.com/tags/%E5%AD%97%E4%BD%93/"/>
+    
+      <category term="配色" scheme="https://blog.aberlt.com/tags/%E9%85%8D%E8%89%B2/"/>
+    
+      <category term="代码块" scheme="https://blog.aberlt.com/tags/%E4%BB%A3%E7%A0%81%E5%9D%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Xcode 9 运行过的项目在 Xcode 8 编译失败</title>
+    <link href="https://blog.aberlt.com/2018/06/27/Xcode-9-%E8%BF%90%E8%A1%8C%E8%BF%87%E7%9A%84%E9%A1%B9%E7%9B%AE%E5%9C%A8-Xcode-8-%E7%BC%96%E8%AF%91%E5%A4%B1%E8%B4%A5/"/>
+    <id>https://blog.aberlt.com/2018/06/27/Xcode-9-运行过的项目在-Xcode-8-编译失败/</id>
+    <published>2018-06-27T06:44:10.000Z</published>
+    <updated>2018-08-08T02:23:12.285Z</updated>
+    
+    <content type="html"><![CDATA[<p>本文记录一个 Xcode 8 和 9 差异造成的项目在 Xcode 8 上面无法正常链接的问题。</p>
+<a id="more"></a>
+<p>最近需要通过 Xcode 8 运行项目验证某些问题，但是发现原来正常运行的工程在 Xcode 8 上编译的时候出现了链接错误。错误提示如下：</p>
+<p><img src="http://images.aberlt.com/20180627104723_YrUtXI_link_error_code_1.png" alt="Linker command failed with exit code 1(use -v to see invocation)"></p>
+<p>因为直接点击无法跳转到详细的 log 页面，所以通过 <code>右击 -&gt; Reveal in Log</code> 进入该页面。</p>
+<p><img src="http://images.aberlt.com/20180627105648_gYCVzR_reveal_error_in_log.png" alt="reveal_error_in_log"></p>
+<p>进入了详细的 log 页面之后可以看到更具体的信息如下：</p>
+<p><img src="http://images.aberlt.com/20180627110511_652NMj_detail_error_of_IOSurface.png" alt="detail_error_of_IOSurface"></p>
+<p>这里提示的是链接的过程中找不到 <code>IOSurface</code> 这个 Framework，进而导致了链接失败。通过一番 Google 发现这是 Xcode 9 新增的 Framework。将其从 Xcode 9 拷贝到 Xcode 8 中即解决了该问题。路径为：<code>Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/</code></p>
+<p>不过解决了该问题后又因为找不到另一个名为 <code>FileProvider</code> 的 Framework 而链接失败，同样从 Xcode 9将其拷贝到 Xcode 8 即可解决。</p>
+<p>就这么水了一篇。。。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本文记录一个 Xcode 8 和 9 差异造成的项目在 Xcode 8 上面无法正常链接的问题。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="杂记" scheme="https://blog.aberlt.com/categories/%E6%9D%82%E8%AE%B0/"/>
+    
+    
+      <category term="Xcode9" scheme="https://blog.aberlt.com/tags/Xcode9/"/>
+    
+      <category term="Xcode8" scheme="https://blog.aberlt.com/tags/Xcode8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Mac 终端通过 privoxy 科学上网</title>
+    <link href="https://blog.aberlt.com/2018/06/25/Mac-%E7%BB%88%E7%AB%AF%E9%80%9A%E8%BF%87-privoxy-%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/"/>
+    <id>https://blog.aberlt.com/2018/06/25/Mac-终端通过-privoxy-科学上网/</id>
+    <published>2018-06-25T04:00:24.000Z</published>
+    <updated>2018-06-27T06:50:47.482Z</updated>
+    
+    <content type="html"><![CDATA[<p>由于终端不支持 socks5 代理，使用 git、curl、brew、gem 等工具时速度特别慢。经过一番搜索，发现可以通过 privoxy 进行转发以达到终端 FQ 的目的。这里记录一下 privoxy 的安装和配置。</p>
+<a id="more"></a>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>通过 homebrew 安装：<code>brew install privoxy</code></p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>通过 vim 编辑配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim /usr/local/etc/privoxy/config</div></pre></td></tr></table></figure>
+<p>加入以下两个配置项</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># 设置 privoxy 监听任意 ip 的 8118 端口，改端口为 privoxy 的默认端口</div><div class="line">listen-address 0.0.0.0:8118</div><div class="line"># 设置转发到本地的 socks5 代理客户端端口</div><div class="line"># shadowsocks 可通过“偏好设置-&gt;高级-&gt;本地 Socks5 监听端口”查看端口号。</div><div class="line">forward-socks5 / localhost:1086 .</div></pre></td></tr></table></figure>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><p>通过以下命令启动 privoxy</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo /usr/local/sbin/privoxy /usr/local/etc/privoxy/config</div></pre></td></tr></table></figure>
+<p>如果是通过 <a href="https://www.privoxy.org">Privoxy官网</a> 下载安装包进行安装，还可以通过其提供的脚本文件启动</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo /Applications/Privoxy/startPrivoxy.sh</div></pre></td></tr></table></figure>
+<p>查看是否成功启动</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ps aux | grep privoxy</div></pre></td></tr></table></figure>
+<p>若成功启动可看到以下信息</p>
+<p><img src="http://p06tir7k3.bkt.clouddn.com/20180621183651_Qty6SC_privoxy_process.png" alt="privoxy_process"></p>
+<p>查看是否监听端口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">netstat -na | grep 8118</div></pre></td></tr></table></figure>
+<p>以下信息表示正在监听</p>
+<p><img src="http://p06tir7k3.bkt.clouddn.com/20180621180229_cFzqt7_network_listen_status.png" alt="network_listen_status"></p>
+<h3 id="转发"><a href="#转发" class="headerlink" title="转发"></a>转发</h3><p>启动之后并不会直接转发网络请求，还需要通过以下命令开启或关闭:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"># 打开</div><div class="line">export http_proxy=&apos;http://localhost:8118&apos;</div><div class="line">export https_proxy=&apos;http://localhost:8118&apos;</div><div class="line"></div><div class="line"># 关闭</div><div class="line">unset http_proxy</div><div class="line">unset https_proxy</div></pre></td></tr></table></figure>
+<p>更方便的方式是在 <code>.bash_profile</code> 文件加入开关函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"># 打开</div><div class="line">function proxy_on() &#123;</div><div class="line">    export no_proxy=&quot;localhost,127.0.0.1,localaddress,.localdomain.com&quot;</div><div class="line">    export http_proxy=&quot;http://127.0.0.1:8118&quot;</div><div class="line">    export https_proxy=$http_proxy</div><div class="line">    echo -e &quot;已开启代理&quot;</div><div class="line">&#125;</div><div class="line"></div><div class="line"># 关闭</div><div class="line">function proxy_off()&#123;</div><div class="line">    unset http_proxy</div><div class="line">    unset https_proxy</div><div class="line">    echo -e &quot;已关闭代理&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>修改完成之后通过 <code>source .bash_profile</code> 使配置文件立即生效。然后可以通过以下命令进行开关：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># 打开</div><div class="line">proxy_on</div><div class="line"></div><div class="line"># 关闭</div><div class="line">proxy_off</div></pre></td></tr></table></figure>
+<h3 id="退出"><a href="#退出" class="headerlink" title="退出"></a>退出</h3><p>通过 <code>ps aux | grep privoxy</code> 找到 privoxy 的进程 id，通过 <code>kill</code> 命令关闭对应的进程。</p>
+<p>如果是通过安装包安装，可以通过其提供的脚本文件关闭</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo /Applications/Privoxy/stopPrivoxy.sh</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;由于终端不支持 socks5 代理，使用 git、curl、brew、gem 等工具时速度特别慢。经过一番搜索，发现可以通过 privoxy 进行转发以达到终端 FQ 的目的。这里记录一下 privoxy 的安装和配置。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="工具" scheme="https://blog.aberlt.com/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+    
+      <category term="终端" scheme="https://blog.aberlt.com/tags/%E7%BB%88%E7%AB%AF/"/>
+    
+      <category term="科学上网" scheme="https://blog.aberlt.com/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/"/>
+    
+      <category term="代理" scheme="https://blog.aberlt.com/tags/%E4%BB%A3%E7%90%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>UITableView 流畅度优化实践</title>
+    <link href="https://blog.aberlt.com/2017/12/30/UITableView-%E6%B5%81%E7%95%85%E5%BA%A6%E4%BC%98%E5%8C%96%E5%AE%9E%E8%B7%B5/"/>
+    <id>https://blog.aberlt.com/2017/12/30/UITableView-流畅度优化实践/</id>
+    <published>2017-12-30T11:07:54.000Z</published>
+    <updated>2018-08-08T02:23:10.917Z</updated>
+    
+    <content type="html"><![CDATA[<p>11 月份对公司项目的列表流畅度进行了一次优化，做完之后一直有别的事情需要处理就把这篇文章一直拖着，这次元旦假期抽一点时间出来对优化工作做一下记录。</p>
+<a id="more"></a>
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>10 月底看到第三方服务商关于公司项目的性能监控报告后发现卡顿率特别高，因此在小组会议上主动提起需要对项目的流畅度进行优化，恰好老大也觉得首页列表的卡顿很严重，后来询问了我关于这个模块优化的想法之后便把这项任务交给了我。其实当时还是挺虚的，虽然看过相关的内容，但并没有实践过，不过对于一个新人来说既然有机会可以做一些业务以外的工作就得好好把握，于是硬着头皮把任务给做了下来。</p>
+<p>优化前：</p>
+<p><img src="http://images.aberlt.com/2018-03-13-Before_fluency_optimization.gif" alt="Before_fluency_optimization"></p>
+<p>优化后：</p>
+<p><img src="http://images.aberlt.com/2018-03-12-After_fluency_optimization.gif" alt="After_fluency_optimization"></p>
+<h2 id="屏幕显示的原理"><a href="#屏幕显示的原理" class="headerlink" title="屏幕显示的原理"></a>屏幕显示的原理</h2><p><img src="http://images.aberlt.com/2018-01-01-ios_screen_display.png" alt="ios_screen_display"></p>
+<p>经过查阅资料，图像显示到屏幕需要经过如上图所示的过程进行处理。</p>
+<p>首先，CPU 把视图创建、布局计算、图片解码、文本绘制等显示内容计算好提交给 GPU；然后 GPU 对内容进行变换、合成、渲染并将渲染结果放入帧缓冲区 FrameBuffer；最后视频控制器通过<strong>垂直同步信号（V-Sync）</strong>逐行读取帧缓冲区的数据并转换后传递给屏幕显示。</p>
+<h3 id="双缓冲机制和垂直同步机制"><a href="#双缓冲机制和垂直同步机制" class="headerlink" title="双缓冲机制和垂直同步机制"></a>双缓冲机制和垂直同步机制</h3><p>iOS 设备为了提升效率使用了双缓冲机制。其原理是 GPU 先将一个渲染结果放入一个缓冲区让视频控制器读取，当下一个内容渲染完成后，GPU 会将视频控制器的指针直接指向第二个缓冲区。</p>
+<p>但双缓冲机制会因为视频控制器读取速度与 GPU 渲染速度的不同步造成图像撕裂的情况。</p>
+<p>为了解决这个问题，GPU 采用了垂直同步机制，即等待显示器的 VSync 信号发出后才进行新的渲染和缓冲区的更新。</p>
+<p>双缓冲和垂直同步两种机制的使用提升了屏幕刷新的效率和画面的流畅度，但也增加了资源的消耗。</p>
+<h2 id="卡顿的产生"><a href="#卡顿的产生" class="headerlink" title="卡顿的产生"></a>卡顿的产生</h2><p>已知垂直同步机制中一个 VSync 信号产生将会引起一个新的内容计算和渲染的流程，在下一个 VSync 信号产生之前，就需要完成从 CPU 的计算到屏幕的显示这个流程。但是并不能保证每一 CPU 或者 GPU 都能够在两个 VSync 之间的时间内完成任务，而这个没有及时完成的任务将会被舍弃，此时屏幕的内容就没有被更新，所以造成了卡顿。如下图所示：</p>
+<p><img src="http://images.aberlt.com/2018-01-01-ios_frame_drop.png" alt="ios_frame_drop"></p>
+<p>因此，我们需要从 CPU 和 GPU 在这个过程中所执行的任务入手，找到可以进行优化的地方。</p>
+<h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h2><h3 id="CPU-在屏幕显示过程中执行的任务及本人进行优化的内容"><a href="#CPU-在屏幕显示过程中执行的任务及本人进行优化的内容" class="headerlink" title="CPU 在屏幕显示过程中执行的任务及本人进行优化的内容"></a>CPU 在屏幕显示过程中执行的任务及本人进行优化的内容</h3><p>CPU 执行的任务主要是：</p>
+<ul>
+<li>创建对象</li>
+<li>调整对象</li>
+<li>销毁对象</li>
+<li>布局计算</li>
+<li>文本计算</li>
+<li>文本绘制</li>
+<li>图片解码</li>
+</ul>
+<p>这里每个任务都有可优化的地方，而我在优化的过程中则根据项目的实际情况对几个任务进行了优化。</p>
+<h4 id="创建对象"><a href="#创建对象" class="headerlink" title="创建对象"></a>创建对象</h4><p>由于列表中只有一个 <code>UITableViewCell</code> 中的一个子控件需要响应触摸事件，所以我将原来使用的 <code>UIView</code>、<code>UIImageView</code> 等控件改为使用 <code>CALayer</code>。这里主要是因为 <code>CALyer</code> 相对来说更加轻量，而且原来的控件有很多属性的设置其实还是在对 <code>CALayer</code> 进行操作。</p>
+<h4 id="布局计算"><a href="#布局计算" class="headerlink" title="布局计算"></a>布局计算</h4><p>原来项目中使用 <code>Masonary</code> 对控件进行布局，这在开发的时候非常方便，但是程序在运行的时候计算量很大，同时还需要对控件的 <code>frame/bounds/center</code> 等属性进行调整，需要消耗很多的资源进而造成性能的损失。</p>
+<p>因此，我将自动布局改为通过 frame 布局，在获取到数据的时候提前对布局进行计算并存储到布局模型中，TableView 可以直接从布局模型获取 Cell 的高度，Cell 也可以直接获取各个子控件的位置和尺寸等信息，避免多次计算，节省资源的消耗和内存的占用。</p>
+<h4 id="文本计算和渲染"><a href="#文本计算和渲染" class="headerlink" title="文本计算和渲染"></a>文本计算和渲染</h4><p>原项目中使用 <code>UILabel</code> 显示文本，由于对行高有特别的要求，需要将内容处理为富文本。这些都是在 Cell 初始化的时候进行操作的，并且是在主线程操作，这对主线程造成了一定的阻塞。</p>
+<p>由于项目中刚好引用了 <code>YYKit</code>，我决定使用文本布局类 <code>YYTextLayout</code> 进行文本的计算和富文本的绘制并将其保存在布局模型中以供后面渲染使用；使用 <code>YYLabel</code> 来做文本的异步渲染，将渲染的工作放到子线程进行。既避免了阻塞主线程，还减少了使用 <code>UILabel</code> 时的很多计算。</p>
+<blockquote>
+<p>因为原来项目中调整对象的操作比较少，而图片则使用了 <code>YYWebImage</code> 进行异步加载，所以这两处没有进行处理。<br>至于对象的销毁，目前并没有造成多大的影响。为了避免由于操作不当造成问题，所以没有从这个方面入手。</p>
+</blockquote>
+<h3 id="GPU-在屏幕显示过程中执行的任务及可优化的内容"><a href="#GPU-在屏幕显示过程中执行的任务及可优化的内容" class="headerlink" title="GPU 在屏幕显示过程中执行的任务及可优化的内容"></a>GPU 在屏幕显示过程中执行的任务及可优化的内容</h3><p>GPU 执行的任务是：</p>
+<ul>
+<li>渲染纹理</li>
+<li>混合视图</li>
+<li>生成图形</li>
+</ul>
+<p>相对来说 GPU 执行的任务类型没有 CPU 那么多。在这个环节我从<strong>混合视图</strong>和<strong>生成图形</strong>两个方面入手进行优化。</p>
+<h4 id="混合视图"><a href="#混合视图" class="headerlink" title="混合视图"></a>混合视图</h4><p>开发过程中为了实现某些需求常常会使得一个视图上有很多个控件层叠在一起，导致视图层级太多、结构复杂。特别是对于透明的控件，GPU 需要计算多个视图混合后的效果，这个过程会消耗更多的资源。</p>
+<p>这里我做的就是将能够组合在一起的视图绘制成富文本或者与其它视图一起合成一张图片，减少视图的层级。同时将不需要透明的视图都设置了与父视图一样的颜色，将 opaque 设置为 YES。</p>
+<h4 id="生成图形"><a href="#生成图形" class="headerlink" title="生成图形"></a>生成图形</h4><p>原项目的列表中几乎每个 Cell 都有一个圆形的图标，实现这个需求的做法是通过设置 <code>CALayer</code> 的 <code>cornerRadius</code> 和 <code>masksToBounds</code> 完成的。众所周知，这两个属性分开使用的时候没问题，但是一起使用的话就必定会造成离屏渲染（Off-Screen rendering）。</p>
+<p>离屏渲染需要先在屏幕外（Off-Screen）渲染完成后再绘制到当前屏幕（On-Screen），这里需要另外分配一块内存进行渲染，而且 On-Screen 和 Off-Screen 之间的上下文环境切换的过程需要很大的开销。</p>
+<p>网上有很多解决离屏渲染的方法，我采用了比较彻底的解决方法，直接在后台通过重绘将图片裁剪为圆角。</p>
+<h3 id="优化后列表的加载过程"><a href="#优化后列表的加载过程" class="headerlink" title="优化后列表的加载过程"></a>优化后列表的加载过程</h3><p><img src="http://images.aberlt.com/2018-01-03-List_show_flow.png" alt="List_show_flow"></p>
+<p>优化思路很简单，但是实际操作起来工作量比较大，也有不少坑，这里说一下最大的坑 <code>CALayer</code> 的光栅化属性 <code>shouldRasterize</code>。</p>
+<h4 id="shouldRasterize"><a href="#shouldRasterize" class="headerlink" title="shouldRasterize"></a>shouldRasterize</h4><p>在调研的时候看到网上的资料说设置这个属性可以提高性能，便在优化的时候尝试了一下，将圆角图标的圆框设置了这个属性，但是结果却不尽人意。当页面出现比较多的圆角图标时，加载几页的内容之后就会变得异常卡顿，肉眼能够非常明显的感受到，FPS 也极速下降，但是通过 Time Profile 和 Core Animation 工具无法排查出问题，后来通过对控件的删减排查才知道是这个属性导致的问题。</p>
+<p>开启 <code>shouldRasterize</code> 后 <code>CAlayer</code> 会被光栅化为位图 bitmap 保存在缓存中以备重用，可以加快渲染过程。但是使用的过程需要注意几个问题：</p>
+<ul>
+<li>不要对经常变动的内容开启，因为一旦更新已经光栅化的 layer 会造成大量离屏渲染</li>
+<li>不要过度使用，系统限制缓存的大小为 2.5x screen size，过度使用的话也会造成离屏渲染</li>
+<li>光栅化的位图如果超过 100 毫秒没有被使用则会被移除，所以对于不连续使用的内容进行光栅化是既没有意义又浪费资源的</li>
+</ul>
+<p>如图为 WWDC 2014 的内容：</p>
+<p><img src="http://images.aberlt.com/2018-01-03-Rasterization.png" alt="Rasterization"></p>
+<p>而我在优化过程中犯的错误就是第一个需要注意的问题：</p>
+<p>把添加到 TableViewCell 的 layer 进行了光栅化，而 TableViewCell 由于复用的原因需要频繁的进行重绘，对已经光栅化的内容进行了更新，导致大量的离屏渲染，所以列表的流畅度才会极速下降。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这次优化中查询了很多资料，了解到不少的原理知识，对于视图是如何绘制到屏幕上也更加了解，也更能针对性地进行分析和优化，在这个过程中也学会了如何使用 Time Profile 和 Core Animation 工具进行检测。</p>
+<p>从这次的踩坑领悟到了不应该人云亦云，对于别人提出的东西要自己去验证是否正确、是否适合运用到自己的项目中。一旦出现无法直接判断、工具也无法排查出的问题应该要逐步去对代码进行校验定位问题所在。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://blog.ibireme.com/2015/11/12/smooth_user_interfaces_for_ios/">iOS 保持界面流畅的技巧</a></p>
+<p><a href="https://icetime17.github.io/2015/07/04/2015-07/iOS-UITableView的优化技巧/">iOS — UITableView的优化技巧</a></p>
+<p><a href="https://github.com/100mango/zen/blob/master/WWDC心得：Advanced%20Graphics%20and%20Animations%20for%20iOS%20Apps/Advanced%20Graphics%20and%20Animations%20for%20iOS%20Apps.md">WWDC心得：Advanced Graphics and Animations for iOS Apps</a></p>
+<p><a href="http://iandai.github.io/blog/2015/09/21/gao-xing-neng-tian-jia-tu-pian-yuan-jiao-fang-fa-bi-jiao-:layer-dot-shouldrasterize,layer-dot-setshadowpathhe-tou-ming-tu-pian/">高性能添加图片圆角方法原理：cornerRadius，layer.shouldRasterize，layer.setShadowPath和透明图片</a></p>
+<p><a href="http://www.jianshu.com/p/080108c969e8">iOS性能优化（一）：Time Profile</a></p>
+<p><a href="https://www.jianshu.com/p/2a01e5e2141f">iOS app性能优化的那些事(二)</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;11 月份对公司项目的列表流畅度进行了一次优化，做完之后一直有别的事情需要处理就把这篇文章一直拖着，这次元旦假期抽一点时间出来对优化工作做一下记录。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="性能优化" scheme="https://blog.aberlt.com/categories/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
+    
+    
+      <category term="UITableView" scheme="https://blog.aberlt.com/tags/UITableView/"/>
+    
+      <category term="流畅" scheme="https://blog.aberlt.com/tags/%E6%B5%81%E7%95%85/"/>
+    
+      <category term="优化" scheme="https://blog.aberlt.com/tags/%E4%BC%98%E5%8C%96/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>记砸壳工具 frida-ios-dump 的使用</title>
+    <link href="https://blog.aberlt.com/2017/12/14/%E8%AE%B0%E7%A0%B8%E5%A3%B3%E5%B7%A5%E5%85%B7-frida-ios-dump-%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
+    <id>https://blog.aberlt.com/2017/12/14/记砸壳工具-frida-ios-dump-的使用/</id>
+    <published>2017-12-14T15:15:34.000Z</published>
+    <updated>2018-08-08T02:23:06.031Z</updated>
+    
+    <content type="html"><![CDATA[<p>拖延症赖了一个多星期，这篇博文主要记录一下使用 <a href="https://github.com/AloneMonkey/frida-ios-dump">frida-ios-dump</a> 对 App 进行砸壳前的一些准备。  </p>
+<a id="more"></a>
+<p>庆哥在 README 中已经写清楚了该工具的用法，我是根据他给的步骤进行的，以下是操作步骤：</p>
+<h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><h3 id="安装-frida"><a href="#安装-frida" class="headerlink" title="安装 frida"></a>安装 frida</h3><p>frida 的安装很简单，我是直接 Google 搜索 frida ，然后根据<a href="https://www.frida.re">官网</a>上的文档进行安装的。</p>
+<h4 id="macOS-安装"><a href="#macOS-安装" class="headerlink" title="macOS 安装"></a><a href="https://www.frida.re/docs/installation/">macOS 安装</a></h4><p>frida 依赖于 python，macOS 已经自带 python 所以不需要再去安装。官网提供了两种安装的方式，我选择使用 pip 自动安装。在终端中输入以下命令回车，然后输入密码即可：<code>sudo pip install frida</code></p>
+<p>在这里我遇到了一个问题，导致安装失败。失败的提示主要是：</p>
+<p><code>Operation not permitted: &#39;/tmp/pip-uW0fNP-uninstall/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/six-1.4.1-py2.7.egg-info&#39;</code></p>
+<p>这里是说无权限对 six 进行操作，经过一番 Google 之后在 pip 仓库的一个 <a href="https://github.com/pypa/pip/issues/3165">issue</a> 中找到了解决方法：即安装的时候忽略已安装的 six。</p>
+<p>最后通过以下命令安装成功。</p>
+<p> <code>sudo pip install frida --ignore-installed six</code></p>
+<blockquote>
+<p>这里应该是我没有关闭 SIP 而导致的问题，因为在公司的电脑上进行并没有出现这个问题。（PS：公司的电脑是从我的个人电脑迁移数据过去的，除了当时尝试全屏使用 iOS 模拟器而关闭 SIP 之外，没有其它不同的地方）</p>
+</blockquote>
+<h4 id="手机安装"><a href="#手机安装" class="headerlink" title="手机安装"></a><a href="https://www.frida.re/docs/ios/#without-jailbreak">手机安装</a></h4><p>官网同时提供了针对越狱手机和非越狱手机安装的方法。这里我只是在越狱手机上进行了安装，至于非越狱的手机暂时还没有尝试。</p>
+<p>越狱手机的安装步骤如下：</p>
+<ol>
+<li>启动 Cydia</li>
+<li><p>添加软件源</p>
+<p> 软件源 <code>Sources</code>-&gt; 编辑 <code>Edit</code>（左上角）-&gt; 添加 <code>Add</code>（右上角）-&gt; 输入 <code>https://build.frida.re</code></p>
+</li>
+<li><p>通过刚才添加的软件源安装 frida 插件。根据手机进行安装：iPhone 5 及之前的机器为 32 位，5s 及之后的机器为 64 位。</p>
+</li>
+</ol>
+<h4 id="安装成功"><a href="#安装成功" class="headerlink" title="安装成功"></a>安装成功</h4><p>两个端都安装完成之后可以用 USB 连接手机在 mac 终端中通过 <code>frida-ps -U</code> 命令测试，若输出手机上安装的 App 名称则说明安装成功。</p>
+<h3 id="ssh-连接手机"><a href="#ssh-连接手机" class="headerlink" title="ssh 连接手机"></a>ssh 连接手机</h3><p>有两种方式连接手机：WiFi 和 USB。WiFi 连接仅需在手机上安装 OpenSSH 即可，USB 连接还需要在 mac 上安装一个工具 iproxy。</p>
+<h4 id="安装-OpenSSH"><a href="#安装-OpenSSH" class="headerlink" title="安装 OpenSSH"></a>安装 OpenSSH</h4><p>在 Cydia 中安装即可。步骤：<code>Cydia</code> -&gt; <code>搜索 OpenSSH</code> -&gt; <code>点击安装</code></p>
+<p>默认用户 root 的密码是：alpine ，连接成功之后使用<code>passwd</code> 命令修改密码。</p>
+<h4 id="WiFi-连接"><a href="#WiFi-连接" class="headerlink" title="WiFi 连接"></a>WiFi 连接</h4><p>首先需要找到设备的 ip，在 WiFi 详情里可以看到。然后在终端中通过 ssh 连接，命令为 <code>ssh root@ip</code>。</p>
+<p>这种方式的速度比较慢一点，建议使用 USB 连接。</p>
+<h4 id="USB-连接"><a href="#USB-连接" class="headerlink" title="USB 连接"></a>USB 连接</h4><blockquote>
+<p>frida-ios-dump 要求通过 USB 连接手机</p>
+</blockquote>
+<p>有两个工具包都带了 iproxy</p>
+<ul>
+<li><code>libimobiledevice</code></li>
+<li><code>usbmuxd</code></li>
+</ul>
+<p>这两个都可以通过 homebrew 安装。安装命令为：<code>brew install libimobiledevice</code> 和 <code>brew install usbmuxd</code></p>
+<p>安装完成之后在终端中通过 iproxy 命令映射端口：<code>iproxy 2222 22</code>，如图：</p>
+<p><img src="http://images.aberlt.com/2017-12-15-iproxy_port.png" alt="iproxy"></p>
+<p>然后在另一个终端窗口中通过 <code>ssh -p 2222 root@localhost</code> 进行连接即可。</p>
+<p><img src="http://images.aberlt.com/2017-12-15-Usb_ssh_connect_iphone.png" alt="Usb_ssh_connect_iphone"></p>
+<h2 id="使用-frida-ios-dump"><a href="#使用-frida-ios-dump" class="headerlink" title="使用 frida-ios-dump"></a>使用 frida-ios-dump</h2><p>在终端中使用 <code>cd</code> 命令进入 frida-ios-dump 脚本所在的文件夹通过 <code>./dump app名称</code> 命令即可进行砸壳。脚本运行完成之后会在文件夹中生成一个已砸壳的 ipa 文件，非常地方便。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>整个过程并不难，如果本来就有逆向基础的话应该非常快就可以做完环境准备，或者说可以直接使用工具了。而我因为没有相关知识，花费了比较多的时间去 Google，不过最后成功砸壳还是挺有成就感的。同时也需要继续学习，搞清楚原理，不能停留在工具的使用上。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;拖延症赖了一个多星期，这篇博文主要记录一下使用 &lt;a href=&quot;https://github.com/AloneMonkey/frida-ios-dump&quot;&gt;frida-ios-dump&lt;/a&gt; 对 App 进行砸壳前的一些准备。  &lt;/p&gt;
+    
+    </summary>
+    
+      <category term="逆向" scheme="https://blog.aberlt.com/categories/%E9%80%86%E5%90%91/"/>
+    
+    
+      <category term="砸壳" scheme="https://blog.aberlt.com/tags/%E7%A0%B8%E5%A3%B3/"/>
+    
+      <category term="frida-ios-dump" scheme="https://blog.aberlt.com/tags/frida-ios-dump/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>iPhone 4s iOS 9.2.1 越狱</title>
+    <link href="https://blog.aberlt.com/2017/12/03/iPhone-4s-iOS-9-2-1-%E8%B6%8A%E7%8B%B1/"/>
+    <id>https://blog.aberlt.com/2017/12/03/iPhone-4s-iOS-9-2-1-越狱/</id>
+    <published>2017-12-03T14:55:04.000Z</published>
+    <updated>2018-08-08T02:23:08.078Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>前天在微博上看到庆哥 <a href="https://weibo.com/xiaoqing28?refer_flag=1005055010_&amp;is_all=1">@Alone_Monkey</a> 放出了一个砸壳工具就一直手痒痒想要试一下，无奈手上没有越狱机器。今天终于按捺不住把一直在吃灰的 iPhone 4s 拿了出来，上网搜了一下 4s 的 9.2.1 版本越狱。本想直接使用盘古团队的工具进行越狱，但是他们的工具并不支持 32 位版本的机器进行 9.+ 系统的越狱，最后使用了威锋上一个帖子分享的工具进行越狱。这里做一下记录。</p>
+<a id="more"></a>
+<h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><ul>
+<li>Impactor<ul>
+<li><a href="https://cydia.saurik.com/api/latest/1">Mac 版本</a></li>
+<li><a href="https://cydia.saurik.com/api/latest/2">Windows 版本</a></li>
+</ul>
+</li>
+<li><a href="http://wall.supplies/MixtapePlayerRC3.ipa">越狱 ipa（MixtapePlayer）</a></li>
+</ul>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><blockquote>
+<p>注意：在开始越狱之前记得进行备份</p>
+</blockquote>
+<ol>
+<li><p>将对应平台的 Impactor 和 ipa 下载完成之后，打开 Impactor 可见若正常连接的话会显示该 iPhone 的名称以及序列号。</p>
+<p> <img src="http://images.aberlt.com/2017-12-03-Cydia_Impactor_normal.png" alt="Cydia_Impactor_normal"></p>
+</li>
+<li><p>将 MixtapePlayer.ipa 拖入上图中 install Cydia Extender 位置后点击 Start，或点击 “Device” -&gt; “Install Package” 从目录中选择文章进行安装。<br> <img src="http://images.aberlt.com/2017-12-03-Device_install_package.png" alt="Device_install_package"></p>
+</li>
+<li><p>在安装开始之前，Impactor 会要求输入 Apple ID 和密码，这里注册一个新的账号比较方便，因为账号若被锁或者开启了双重认证是无法被该工具用于安装 ipa 的。</p>
+<p> <img src="http://images.aberlt.com/2017-12-03-Apple_ID.png" alt="Apple_ID"><br><img src="http://images.aberlt.com/2017-12-03-Apple_password.png" alt="Apple_password"></p>
+<p> 当 Impactor 成功将 ipa 安装到手机之后，我们可以在手机上看到一个名为 Home Depot 的 App。</p>
+<p> <img src="http://images.aberlt.com/2017-12-04-Home_depot_icon.png" alt="Home_depot_icon"></p>
+</li>
+<li><p>进入“设置“-&gt;”通用“-&gt;”设备管理“，点击刚才输入的 Apple ID 进入，然后再点击“信任「Apple ID」。当我们将描述文件设置为信任之后就可以打开 Home Depot 了。<br> 此时，我们可以看到如下界面。由于我已经越狱了，所以显示的是 Enable Jailbreak ，第一次启动显示的是 Prepare For Jailbreak 。点击 Prepare For Jailbreak 后会进入一个”协议？“的界面，此时点击 Accept 又会进入另一个界面，这里没有截图。当时我是选择了 Proceed With Jailbreak 后便进入了 Cydia 的安装界面，点击 Begin Installation 之后不要动手机，知道其自动重启。</p>
+<p> <img src="http://images.aberlt.com/2017-12-04-Home_depot_appearence.png" alt="Home_depot_appearence"></p>
+</li>
+<li><p>重启进入系统之后，如果桌面上有 Cydia 的图标则说明越狱成功。（PS：没有的话可以试着重启一次，若依然没有的话就是越狱失败了。。。）</p>
+<p> <img src="http://images.aberlt.com/2017-12-04-Cydia_icon.png" alt="Cydia_icon"></p>
+</li>
+</ol>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>至此，我们完成了设备的越狱。越狱的过程其实很简单，会出问题的地方主要是我们提供的 Apple ID ，所以<strong>重新注册一个</strong>是最方便的方式。另外，还有一些需要注意的地方。</p>
+<blockquote>
+<p>注意点<br>1、每次重启手机之后需要在 Home Depot 中重新激活越狱。即步骤 4 中图片所示，点击 Enable Jailbreak 进行激活。<br>2、应该大部分人都跟我一样提供的不会提供开发者账号，所以这里就跟我们在开发过程中使用免费账号 Run App 一样只有七天的使用时间。因此，每隔七天我们就需要通过电脑重新安装 Home Depot。<br>3、如果手机不需要关机的话，以上两个注意点可以忽略。</p>
+</blockquote>
+<p>今天越狱完顺便玩了玩庆哥的“砸壳工具”，确实非常方便。改天再写篇文章记录一下吧！！！</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h2&gt;&lt;p&gt;前天在微博上看到庆哥 &lt;a href=&quot;https://weibo.com/xiaoqing28?refer_flag=1005055010_&amp;amp;is_all=1&quot;&gt;@Alone_Monkey&lt;/a&gt; 放出了一个砸壳工具就一直手痒痒想要试一下，无奈手上没有越狱机器。今天终于按捺不住把一直在吃灰的 iPhone 4s 拿了出来，上网搜了一下 4s 的 9.2.1 版本越狱。本想直接使用盘古团队的工具进行越狱，但是他们的工具并不支持 32 位版本的机器进行 9.+ 系统的越狱，最后使用了威锋上一个帖子分享的工具进行越狱。这里做一下记录。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="逆向" scheme="https://blog.aberlt.com/categories/%E9%80%86%E5%90%91/"/>
+    
+    
+      <category term="4s" scheme="https://blog.aberlt.com/tags/4s/"/>
+    
+      <category term="9.2.1" scheme="https://blog.aberlt.com/tags/9-2-1/"/>
+    
+      <category term="越狱" scheme="https://blog.aberlt.com/tags/%E8%B6%8A%E7%8B%B1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Mac 使用 Charles 对 iOS 进行 https 抓包</title>
+    <link href="https://blog.aberlt.com/2017/11/29/Mac-%E4%BD%BF%E7%94%A8-Charles-%E5%AF%B9-iOS-%E8%BF%9B%E8%A1%8C-https-%E6%8A%93%E5%8C%85/"/>
+    <id>https://blog.aberlt.com/2017/11/29/Mac-使用-Charles-对-iOS-进行-https-抓包/</id>
+    <published>2017-11-29T06:50:12.000Z</published>
+    <updated>2018-08-08T02:23:09.496Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>网上有很多关于使用 Charles 对 http 和 https 进行抓包的教程。其中唐巧大佬写的这篇<a href="http://blog.devtang.com/2015/11/14/charles-introduction/">Charles 从入门到精通</a>是本人看过的较为详细的关于 http 抓包的教程，同时也介绍了很多关于 Charles 的使用，而不仅仅是简单地说明如何进行配置。<br>而关于 https 抓包的教程，目前本人看到的大多数教程都只适用于 iOS 9 及以下版本，在 iOS 10 及 iOS 11 系统上拦截到的请求只能看到乱码。因此，写下这篇文章做个记录。  </p>
+<a id="more"></a>
+<h2 id="对-https-进行抓包"><a href="#对-https-进行抓包" class="headerlink" title="对 https 进行抓包"></a>对 https 进行抓包</h2><p>Charles 对 https 进行抓包的配置其实很简单，只需要在原来配置 http 抓包的基础上再增加两个步骤即可。</p>
+<ul>
+<li>设置 SSL 代理</li>
+<li>安装证书</li>
+</ul>
+<h3 id="设置-SSL-代理"><a href="#设置-SSL-代理" class="headerlink" title="设置 SSL 代理"></a>设置 SSL 代理</h3><p>通过选择菜单栏的 “Proxy” -&gt; “SSL Proxying Settings”，如下图：</p>
+<p><img src="http://images.aberlt.com/2017-11-30-proxy_ssl_proxying_settings.jpg" alt=""></p>
+<p>打开 SSL 代理设置弹窗，如下图：</p>
+<p><img src="http://images.aberlt.com/2017-11-30-ssl_proxying_settings.jpg" alt=""></p>
+<p>勾选 “Enable SSL Proxying” -&gt; “Add” 添加拦截的规则，如下图：</p>
+<p><img src="http://images.aberlt.com/2017-11-30-edit_location.jpg" alt=""></p>
+<ul>
+<li>“Host” 填入拦截的主机域名，* 表示拦截所有请求</li>
+<li>“Port” 填入拦截的端口，抓取 https 一般为 443</li>
+</ul>
+<h3 id="安装证书"><a href="#安装证书" class="headerlink" title="安装证书"></a>安装证书</h3><p>SSL 代理设置完成之后需要进行证书的安装。mac 上必须要安装证书，视情况在模拟器或手机上安装证书。  </p>
+<h4 id="mac-安装证书"><a href="#mac-安装证书" class="headerlink" title="mac 安装证书"></a>mac 安装证书</h4><p>如图所示，通过选择菜单栏的 “Help” -&gt; “SSL Proxying” -&gt; “Install Charles Root Certificate” 在 mac 上安装证书。</p>
+<p><img src="http://images.aberlt.com/2017-11-30-mac_install_charles_root_certificate.jpg" alt=""></p>
+<blockquote>
+<p>注意：此处安装证书之后还需要在钥匙串中将该证书的信任状态由系统默认设置为始终信任，如下图：</p>
+</blockquote>
+<p><img src="http://images.aberlt.com/2017-11-30-mac_trust_charles_proxy.jpg" alt=""></p>
+<h4 id="模拟器安装证书"><a href="#模拟器安装证书" class="headerlink" title="模拟器安装证书"></a>模拟器安装证书</h4><p>模拟器安装证书非常简单，通过选择菜单栏的 “Help” -&gt; “SSL Proxying” -&gt; “Install Charles Root Certificate in iOS Simulators” 即可。如下图：</p>
+<p><img src="http://images.aberlt.com/2017-11-30-simulators_install_charles_root_certificate.jpg" alt=""></p>
+<h4 id="手机安装证书"><a href="#手机安装证书" class="headerlink" title="手机安装证书"></a>手机安装证书</h4><p>在手机上安装证书通过选择菜单栏的 “Help” -&gt; “SSL Proxying” -&gt; “Install Charles Root Certificate on a Mobile Device or Remote Browser”，如下图：</p>
+<p><img src="http://images.aberlt.com/2017-11-30-mobile_install_charles_root_certificate.jpg" alt=""></p>
+<p>此时，Charles 会弹出提示框。提示我们需要设置代理，然后访问 chls.pro/ssl 下载证书并进行安装。</p>
+<h5 id="设置代理"><a href="#设置代理" class="headerlink" title="设置代理"></a>设置代理</h5><p>手机在连接 Wi-Fi 的情况下，通过点击 Wi-Fi 名最后的详情按钮进入详情界面，将 HTTP 代理设置为手动，并根据 Charles 的弹窗将 ip 和 端口填入。</p>
+<p><img src="http://images.aberlt.com/2017-11-30-wifi_detail.jpg" alt=""></p>
+<blockquote>
+<p>注意：<br>代理配置完成之后，Charles 会弹出一个窗口提示是否信任手机 ip 的请求，此时应选择 “Allow”，如下图：</p>
+</blockquote>
+<p><img src="http://images.aberlt.com/2017-11-30-charles_tips_for_mobile_install.jpg" alt=""></p>
+<h5 id="下载安装证书"><a href="#下载安装证书" class="headerlink" title="下载安装证书"></a>下载安装证书</h5><p>代理设置完成之后，通过 Safari 访问 chls.pro/ssl 即可下载证书，证书下载完成时会弹出安装证书的窗口，点击安装即可。如下图：</p>
+<p><img src="http://images.aberlt.com/2017-11-30-mobile_install_charles_proxy.jpg" alt=""></p>
+<hr>
+<blockquote>
+<p>注意：<br>以上模拟器和手机安装证书的步骤适用于 iOS 9 及以下的系统，也是网上很多教程包含的内容。</p>
+</blockquote>
+<p>在 iOS 10 和 iOS 11 系统上我们还需要进行<strong>证书信任设置</strong>，这个选项比较隐蔽，通过以下步骤进入：</p>
+<blockquote>
+<p>设置 -&gt; 通用 -&gt; 关于本机 -&gt; 证书信任设置</p>
+</blockquote>
+<p><img src="http://images.aberlt.com/2017-11-30-about_in_phone.jpg" alt=""></p>
+<p>找到 Charles 的证书，打开信任开关即可。如下图：</p>
+<p><img src="http://images.aberlt.com/2017-11-30-certificate_trust_settings.jpg" alt=""></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>总而言之，在配置的过程中特别注意 iOS 10 和 iOS 11 系统上还需要在关于本机中进行证书信任设置。<br>到此为止我们就可以进行 https 抓包了。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h2&gt;&lt;p&gt;网上有很多关于使用 Charles 对 http 和 https 进行抓包的教程。其中唐巧大佬写的这篇&lt;a href=&quot;http://blog.devtang.com/2015/11/14/charles-introduction/&quot;&gt;Charles 从入门到精通&lt;/a&gt;是本人看过的较为详细的关于 http 抓包的教程，同时也介绍了很多关于 Charles 的使用，而不仅仅是简单地说明如何进行配置。&lt;br&gt;而关于 https 抓包的教程，目前本人看到的大多数教程都只适用于 iOS 9 及以下版本，在 iOS 10 及 iOS 11 系统上拦截到的请求只能看到乱码。因此，写下这篇文章做个记录。  &lt;/p&gt;
+    
+    </summary>
+    
+      <category term="工具" scheme="https://blog.aberlt.com/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+    
+      <category term="Charles" scheme="https://blog.aberlt.com/tags/Charles/"/>
+    
+      <category term="抓包" scheme="https://blog.aberlt.com/tags/%E6%8A%93%E5%8C%85/"/>
+    
+      <category term="https" scheme="https://blog.aberlt.com/tags/https/"/>
+    
+  </entry>
+  
+</feed>

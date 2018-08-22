@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Xcode 导出字体配色方案和代码块 | aberlt’s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="这两天 Xcode 出了点问题，需要卸载重装。于是搜了下怎么导出字体配色方案和代码块，这里做一下记录。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Xcode 导出字体配色方案和代码块">
+<meta property="og:url" content="https://blog.aberlt.com/2018/07/05/Xcode-export-color-theme-and-code-snippet/index.html">
+<meta property="og:site_name" content="aberlt’s blog">
+<meta property="og:description" content="这两天 Xcode 出了点问题，需要卸载重装。于是搜了下怎么导出字体配色方案和代码块，这里做一下记录。">
+<meta property="og:updated_time" content="2018-07-05T07:57:48.627Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Xcode 导出字体配色方案和代码块">
+<meta name="twitter:description" content="这两天 Xcode 出了点问题，需要卸载重装。于是搜了下怎么导出字体配色方案和代码块，这里做一下记录。">
+  
+    <link rel="alternative" href="/atom.xml" title="aberlt’s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.png" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">aberlt</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">一名龟速摸索中的 iOS 菜鸟</p>
+        
+        
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">首页</a></li>
+                        
+                            <li><a href="/archives">归档</a></li>
+                        
+                            <li><a href="/tags">标签</a></li>
+                        
+                            <li><a href="/about">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/aberlt" title="github">github</a>
+                            
+                                <a class="fl weibo" target="_blank" href="https://weibo.com/1897251787/profile?rightmod=1&wvr=6&mod=personinfo" title="weibo">weibo</a>
+                            
+                                <a class="fl rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                
+                
+
+                
+                
+                <section class="switch-part switch-part3">
+                
+                    <div id="js-aboutme">爱音乐、爱运动、爱交友、喜欢接触新鲜事物、迎接新的挑战</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.png" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">aberlt</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">一名龟速摸索中的 iOS 菜鸟</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">首页</a></li>
+                
+                    <li><a href="/archives">归档</a></li>
+                
+                    <li><a href="/tags">标签</a></li>
+                
+                    <li><a href="/about">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="github" target="_blank" href="https://github.com/aberlt" title="github">github</a>
+                    
+                        <a class="weibo" target="_blank" href="https://weibo.com/1897251787/profile?rightmod=1&wvr=6&mod=personinfo" title="weibo">weibo</a>
+                    
+                        <a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-Xcode-export-color-theme-and-code-snippet" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/07/05/Xcode-export-color-theme-and-code-snippet/" class="article-date">
+      <time datetime="2018-07-05T06:55:31.000Z" itemprop="datePublished">2018-07-05</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Xcode 导出字体配色方案和代码块
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/杂记/">杂记</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Xcode/">Xcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/代码块/">代码块</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/字体/">字体</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/配色/">配色</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>这两天 Xcode 出了点问题，需要卸载重装。于是搜了下怎么导出<strong>字体配色方案</strong>和<strong>代码块</strong>，这里做一下记录。</p>
+<a id="more"></a>
+<h2 id="字体配色方案"><a href="#字体配色方案" class="headerlink" title="字体配色方案"></a>字体配色方案</h2><p>当我们修改了 Xcode 的配色方案后，在以下 <code>~/Library/Developer/Xcode/UserData/FontAndColorThemes</code> 目录会有一个后缀名为 <code>xccolortheme</code> 的配置文件，将其拷贝到其它目录。重新安装 Xcode 之后再将该文件拷贝回  <code>FontAndColorThemes</code> 目录即可。</p>
+<blockquote>
+<p>如果没有修改配色方案的话需要手动创建 <code>FontAndColorThemes</code> 目录<br>当然，也可以直接拷贝此目录</p>
+</blockquote>
+<h2 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h2><p>代码块存储在 <code>~/Library/Developer/Xcode/UserData/CodeSnippets</code> 下，进入该目录可以看到每个代码块都被存储为一个文件，后缀名为 <code>codesnippet</code> 。</p>
+<p>与导出字体配色方案一样，同样将相应的文件或目录拷贝到其它目录，在 Xcode 重装之后再拷贝回去。</p>
+<blockquote>
+<p>需要注意的是，如果在将文件拷贝回去之前已经打开了 Xcode 的话，需要重新启动才可以看到相关配置</p>
+</blockquote>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://blog.csdn.net/zidonghua082/article/details/25375625">xcode自定义配色方案以及配色方案的移植</a></p>
+<p><a href="https://blog.csdn.net/jsd0915/article/details/54892360">xcode如何导出自定义的代码块</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2018/07/05/Xcode-export-color-theme-and-code-snippet/">Xcode 导出字体配色方案和代码块</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 aberlt 的个人博客">aberlt</a></p>
+        <p><span>发布时间:</span>2018年07月05日 - 14时55分</p>
+        <p><span>最后更新:</span>2018年07月05日 - 15时57分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2018/07/05/Xcode-export-color-theme-and-code-snippet/" title="Xcode 导出字体配色方案和代码块">https://blog.aberlt.com/2018/07/05/Xcode-export-color-theme-and-code-snippet/</a>
+            <span class="copy-path" data-clipboard-text="原文: https://blog.aberlt.com/2018/07/05/Xcode-export-color-theme-and-code-snippet/　　作者: aberlt" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"知识共享 署名-非商业性使用-相同方式共享 4.0 国际 许可协议"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+  
+    <a href="/2018/06/27/Xcode-9-运行过的项目在-Xcode-8-编译失败/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Xcode 9 运行过的项目在 Xcode 8 编译失败</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#字体配色方案"><span class="toc-number">1.</span> <span class="toc-text">字体配色方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码块"><span class="toc-number">2.</span> <span class="toc-text">代码块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-number">3.</span> <span class="toc-text">参考</span></a></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+
+
+    
+        <section id="comments">
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'aberlt'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2018/06/27/Xcode-9-运行过的项目在-Xcode-8-编译失败/" title="下一篇: Xcode 9 运行过的项目在 Xcode 8 编译失败">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/07/05/Xcode-export-color-theme-and-code-snippet/">Xcode 导出字体配色方案和代码块</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/27/Xcode-9-运行过的项目在-Xcode-8-编译失败/">Xcode 9 运行过的项目在 Xcode 8 编译失败</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/25/Mac-终端通过-privoxy-科学上网/">Mac 终端通过 privoxy 科学上网</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/30/UITableView-流畅度优化实践/">UITableView 流畅度优化实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/14/记砸壳工具-frida-ios-dump-的使用/">记砸壳工具 frida-ios-dump 的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/03/iPhone-4s-iOS-9-2-1-越狱/">iPhone 4s iOS 9.2.1 越狱</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/29/Mac-使用-Charles-对-iOS-进行-https-抓包/">Mac 使用 Charles 对 iOS 进行 https 抓包</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2018. All rights reserved.
+            </div>
+            <div class="footer-right">
+                <a href="https://aberlt.github.io/" target="_blank">本博客</a> 主题 <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> 由 luuman 制作
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >访客数量: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-112065017-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?2a71c3f563a10fddf64ab029a7198765";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>
