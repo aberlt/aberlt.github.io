@@ -11,13 +11,13 @@
 <meta property="og:url" content="https://blog.aberlt.com/2018/06/25/Mac-终端通过-privoxy-科学上网/index.html">
 <meta property="og:site_name" content="aberlt’s blog">
 <meta property="og:description" content="由于终端不支持 socks5 代理，使用 git、curl、brew、gem 等工具时速度特别慢。经过一番搜索，发现可以通过 privoxy 进行转发以达到终端 FQ 的目的。这里记录一下 privoxy 的安装和配置。">
-<meta property="og:image" content="http://p06tir7k3.bkt.clouddn.com/20180621183651_Qty6SC_privoxy_process.png">
-<meta property="og:image" content="http://p06tir7k3.bkt.clouddn.com/20180621180229_cFzqt7_network_listen_status.png">
-<meta property="og:updated_time" content="2018-06-27T06:50:47.482Z">
+<meta property="og:image" content="http://images.aberlt.com/20180621183651_Qty6SC_privoxy_process.png">
+<meta property="og:image" content="http://images.aberlt.com/20180621180229_cFzqt7_network_listen_status.png">
+<meta property="og:updated_time" content="2018-11-30T06:50:12.642Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mac 终端通过 privoxy 科学上网">
 <meta name="twitter:description" content="由于终端不支持 socks5 代理，使用 git、curl、brew、gem 等工具时速度特别慢。经过一番搜索，发现可以通过 privoxy 进行转发以达到终端 FQ 的目的。这里记录一下 privoxy 的安装和配置。">
-<meta name="twitter:image" content="http://p06tir7k3.bkt.clouddn.com/20180621183651_Qty6SC_privoxy_process.png">
+<meta name="twitter:image" content="http://images.aberlt.com/20180621183651_Qty6SC_privoxy_process.png">
   
     <link rel="alternative" href="/atom.xml" title="aberlt’s blog" type="application/atom+xml">
   
@@ -218,11 +218,11 @@
 <p>查看是否成功启动</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ps aux | grep privoxy</div></pre></td></tr></table></figure>
 <p>若成功启动可看到以下信息</p>
-<p><img src="http://p06tir7k3.bkt.clouddn.com/20180621183651_Qty6SC_privoxy_process.png" alt="privoxy_process"></p>
+<p><img src="http://images.aberlt.com/20180621183651_Qty6SC_privoxy_process.png" alt="privoxy_process"></p>
 <p>查看是否监听端口</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">netstat -na | grep 8118</div></pre></td></tr></table></figure>
 <p>以下信息表示正在监听</p>
-<p><img src="http://p06tir7k3.bkt.clouddn.com/20180621180229_cFzqt7_network_listen_status.png" alt="network_listen_status"></p>
+<p><img src="http://images.aberlt.com/20180621180229_cFzqt7_network_listen_status.png" alt="network_listen_status"></p>
 <h3 id="转发"><a href="#转发" class="headerlink" title="转发"></a>转发</h3><p>启动之后并不会直接转发网络请求，还需要通过以下命令开启或关闭:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"># 打开</div><div class="line">export http_proxy=&apos;http://localhost:8118&apos;</div><div class="line">export https_proxy=&apos;http://localhost:8118&apos;</div><div class="line"></div><div class="line"># 关闭</div><div class="line">unset http_proxy</div><div class="line">unset https_proxy</div></pre></td></tr></table></figure>
 <p>更方便的方式是在 <code>.bash_profile</code> 文件加入开关函数。</p>
@@ -243,7 +243,7 @@
         <p><span>本文标题:</span><a href="/2018/06/25/Mac-终端通过-privoxy-科学上网/">Mac 终端通过 privoxy 科学上网</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 aberlt 的个人博客">aberlt</a></p>
         <p><span>发布时间:</span>2018年06月25日 - 12时00分</p>
-        <p><span>最后更新:</span>2018年06月27日 - 14时50分</p>
+        <p><span>最后更新:</span>2018年11月30日 - 14时50分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2018/06/25/Mac-终端通过-privoxy-科学上网/" title="Mac 终端通过 privoxy 科学上网">https://blog.aberlt.com/2018/06/25/Mac-终端通过-privoxy-科学上网/</a>
             <span class="copy-path" data-clipboard-text="原文: https://blog.aberlt.com/2018/06/25/Mac-终端通过-privoxy-科学上网/　　作者: aberlt" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

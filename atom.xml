@@ -96,7 +96,7 @@
     <link href="https://blog.aberlt.com/2018/06/25/Mac-%E7%BB%88%E7%AB%AF%E9%80%9A%E8%BF%87-privoxy-%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/"/>
     <id>https://blog.aberlt.com/2018/06/25/Mac-终端通过-privoxy-科学上网/</id>
     <published>2018-06-25T04:00:24.000Z</published>
-    <updated>2018-06-27T06:50:47.482Z</updated>
+    <updated>2018-11-30T06:50:12.642Z</updated>
     
     <content type="html"><![CDATA[<p>由于终端不支持 socks5 代理，使用 git、curl、brew、gem 等工具时速度特别慢。经过一番搜索，发现可以通过 privoxy 进行转发以达到终端 FQ 的目的。这里记录一下 privoxy 的安装和配置。</p>
 <a id="more"></a>
@@ -112,11 +112,11 @@
 <p>查看是否成功启动</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ps aux | grep privoxy</div></pre></td></tr></table></figure>
 <p>若成功启动可看到以下信息</p>
-<p><img src="http://p06tir7k3.bkt.clouddn.com/20180621183651_Qty6SC_privoxy_process.png" alt="privoxy_process"></p>
+<p><img src="http://images.aberlt.com/20180621183651_Qty6SC_privoxy_process.png" alt="privoxy_process"></p>
 <p>查看是否监听端口</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">netstat -na | grep 8118</div></pre></td></tr></table></figure>
 <p>以下信息表示正在监听</p>
-<p><img src="http://p06tir7k3.bkt.clouddn.com/20180621180229_cFzqt7_network_listen_status.png" alt="network_listen_status"></p>
+<p><img src="http://images.aberlt.com/20180621180229_cFzqt7_network_listen_status.png" alt="network_listen_status"></p>
 <h3 id="转发"><a href="#转发" class="headerlink" title="转发"></a>转发</h3><p>启动之后并不会直接转发网络请求，还需要通过以下命令开启或关闭:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"># 打开</div><div class="line">export http_proxy=&apos;http://localhost:8118&apos;</div><div class="line">export https_proxy=&apos;http://localhost:8118&apos;</div><div class="line"></div><div class="line"># 关闭</div><div class="line">unset http_proxy</div><div class="line">unset https_proxy</div></pre></td></tr></table></figure>
 <p>更方便的方式是在 <code>.bash_profile</code> 文件加入开关函数。</p>
@@ -245,7 +245,7 @@
     <link href="https://blog.aberlt.com/2017/12/14/%E8%AE%B0%E7%A0%B8%E5%A3%B3%E5%B7%A5%E5%85%B7-frida-ios-dump-%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
     <id>https://blog.aberlt.com/2017/12/14/记砸壳工具-frida-ios-dump-的使用/</id>
     <published>2017-12-14T15:15:34.000Z</published>
-    <updated>2018-08-08T02:23:06.031Z</updated>
+    <updated>2018-11-30T06:52:39.286Z</updated>
     
     <content type="html"><![CDATA[<p>拖延症赖了一个多星期，这篇博文主要记录一下使用 <a href="https://github.com/AloneMonkey/frida-ios-dump">frida-ios-dump</a> 对 App 进行砸壳前的一些准备。  </p>
 <a id="more"></a>
@@ -289,7 +289,7 @@
 <p><img src="http://images.aberlt.com/2017-12-15-iproxy_port.png" alt="iproxy"></p>
 <p>然后在另一个终端窗口中通过 <code>ssh -p 2222 root@localhost</code> 进行连接即可。</p>
 <p><img src="http://images.aberlt.com/2017-12-15-Usb_ssh_connect_iphone.png" alt="Usb_ssh_connect_iphone"></p>
-<h2 id="使用-frida-ios-dump"><a href="#使用-frida-ios-dump" class="headerlink" title="使用 frida-ios-dump"></a>使用 frida-ios-dump</h2><p>在终端中使用 <code>cd</code> 命令进入 frida-ios-dump 脚本所在的文件夹通过 <code>./dump app名称</code> 命令即可进行砸壳。脚本运行完成之后会在文件夹中生成一个已砸壳的 ipa 文件，非常地方便。</p>
+<h2 id="使用-frida-ios-dump"><a href="#使用-frida-ios-dump" class="headerlink" title="使用 frida-ios-dump"></a>使用 frida-ios-dump</h2><p>在终端中使用 <code>cd</code> 命令进入 frida-ios-dump 脚本所在的文件夹通过 <code>./dump.py app名称</code> 命令即可进行砸壳。脚本运行完成之后会在文件夹中生成一个已砸壳的 ipa 文件，非常地方便。</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>整个过程并不难，如果本来就有逆向基础的话应该非常快就可以做完环境准备，或者说可以直接使用工具了。而我因为没有相关知识，花费了比较多的时间去 Google，不过最后成功砸壳还是挺有成就感的。同时也需要继续学习，搞清楚原理，不能停留在工具的使用上。</p>
 ]]></content>
     
